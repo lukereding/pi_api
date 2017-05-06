@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, make_response
-#from gpiozero import CPUTemperature
+from gpiozero import CPUTemperature
 
 app = Flask(__name__)
 
@@ -9,8 +9,9 @@ def not_found(error):
 
 @app.route('/temp', methods = ['GET'])
 def get_temp():
-    cpu = CPUTemperature()
-    return jsonify(cpu.temperature)
+    with app.app_context():
+        cpu = CPUTemperature()
+        return jsonify({'temperature': cpu.temperature})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host = '0.0.0.0', debug = True)
