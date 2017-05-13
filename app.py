@@ -15,12 +15,9 @@ def send_email(message, password):
     # send the email
     smtpObj.sendmail('lukereding@gmail.com', email, "Subject: text received\n{}".format(message))
 
-app = Flask(__name__)
-
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
-
 
 @app.route('/')
 def hello():
@@ -31,8 +28,6 @@ def get_temp():
     with app.app_context():
         cpu = CPUTemperature()
         return render_template('temp.html', temp = cpu.temperature)
-
-app = Flask(__name__)
 
 @app.route("/receive_sms", methods=['GET','POST'])
 def receive_sms():
@@ -49,6 +44,9 @@ def receive_sms():
     send_email(text, passw)
 
     return "Message received", 200
+
+
+app = Flask(__name__)
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug = True, port = 5001)
