@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, make_response, render_template, request
 from gpiozero import CPUTemperature
 import plivo, plivoxml
+import os
 
 def send_email(message, password):
     """Send reminder emails to everyone in dict_of_recipients."""
