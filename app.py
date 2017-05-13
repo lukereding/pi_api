@@ -15,7 +15,7 @@ def send_email(message, password):
         print("could not log in")
         # sys.exit(1)
     # send the email
-    smtpObj.sendmail('lukereding@gmail.com', email, "Subject: text received\n{}".format(message))
+    smtpObj.sendmail('lukereding@gmail.com', 'lukereding@gmail.com', "Subject: text received\n{}".format(message))
 
 app = Flask(__name__)
     
