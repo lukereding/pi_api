@@ -35,7 +35,6 @@ def get_temp():
 
 @app.route("/receive_sms", methods=['GET','POST'])
 def receive_sms():
-    print(request.header)
     # Sender's phone numer
     from_number = request.values.get('From')
     # Receiver's phone number - Plivo number
