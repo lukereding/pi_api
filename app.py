@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, make_response, render_template, request
+from flask import Flask, jsonify, make_response, render_template, request, abort
 from gpiozero import CPUTemperature
 import plivo, plivoxml
 import os
@@ -35,6 +35,8 @@ def get_temp():
 
 @app.route("/receive_sms", methods=['GET','POST'])
 def receive_sms():
+    if not request.values.get('From'):
+        abort(404)
     # Sender's phone numer
     from_number = request.values.get('From')
     # Receiver's phone number - Plivo number
