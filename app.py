@@ -3,6 +3,7 @@ from gpiozero import CPUTemperature
 import plivo, plivoxml
 import os
 import smtplib
+from email.mime.text import MIMEText
 
 def send_email(message, password):
     """Send reminder emails to everyone in dict_of_recipients."""
@@ -15,8 +16,14 @@ def send_email(message, password):
         print("could not log in")
         # sys.exit(1)
     # send the email
-    smtpObj.sendmail('lukereding@gmail.com', 'lukereding@gmail.com', "Subject: text received\n{}".format(message))
-
+    msg = MIMEText(message)
+    msg['Subject'] = 'text received'
+    msg['From'] = 'info@lreding.com'
+    msg['To'] = 'lukereding@gmail.com'
+    msg = msg.as_string()
+    session.sendmail('lukereding@gmail.com', 'lukereding@gmail.com', msg)
+    
+    
 app = Flask(__name__)
     
 @app.errorhandler(404)
