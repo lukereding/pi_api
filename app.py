@@ -7,11 +7,11 @@ from email.mime.text import MIMEText
 
 def send_email(message, password):
     """Send reminder emails to everyone in dict_of_recipients."""
-    smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
-    smtpObj.ehlo()
-    smtpObj.starttls()
+    session = smtplib.SMTP('smtp.gmail.com', 587)
+    session.ehlo()
+    session.starttls()
     try:
-        smtpObj.login('lukereding@gmail.com', password)
+        session.login('lukereding@gmail.com', password)
     except:
         print("could not log in")
         # sys.exit(1)
